@@ -2,6 +2,8 @@
   var MULTIPLE_NUMBERS_RE = /\d.*?\d.*?\d/;
   var MULTIPLE_SYMBOLS_RE = /[!@#$%^&*?_~].*?[!@#$%^&*?_~]/;
   var UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/;
+  var LOWERCASE_RE = /[a-z]/;
+  var UPPERCASE_RE = /[A-Z]/;
   var SYMBOL_RE = /[!@#\$%^&*?_~]/;
 
   function escapeForRegexp(string) {
@@ -40,6 +42,8 @@
       score += this.scoreFor("username");
       score += this.scoreFor("sequences");
       score += this.scoreFor("repetitions");
+      score += this.scoreFor("uppercase");
+      score += this.scoreFor("lowercase");
 
       if (score < 0) {
         score = 0;
@@ -92,6 +96,18 @@
 
       case "uppercase_lowercase":
         if (this.password.match(UPPERCASE_LOWERCASE_RE)) {
+          score = 10;
+        }
+        break;
+
+       case "uppercase":
+        if (this.password.match(UPPERCASE_RE)) {
+          score = 10;
+        }
+        break;
+
+      case "lowercase":
+        if (this.password.match(LOWERCASE_RE)) {
           score = 10;
         }
         break;
