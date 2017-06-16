@@ -2,6 +2,8 @@ var PasswordStrength = function() {
 	var MULTIPLE_NUMBERS_RE = /\d.*?\d.*?\d/;
 	var MULTIPLE_SYMBOLS_RE = /[!@#$%^&*?_~].*?[!@#$%^&*?_~]/;
 	var UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/;
+	var LOWERCASE_RE = /[a-z]/;
+	var UPPERCASE_RE = /[A-Z]/;
 	var SYMBOL_RE = /[!@#\$%^&*?_~]/;
 
 	this.username = null;
@@ -19,6 +21,8 @@ var PasswordStrength = function() {
 			this.score += this.scoreFor("numbers");
 			this.score += this.scoreFor("symbols");
 			this.score += this.scoreFor("uppercase_lowercase");
+			this.score += this.scoreFor("uppercase");
+			this.score += this.scoreFor("lowercase");
 			this.score += this.scoreFor("numbers_chars");
 			this.score += this.scoreFor("numbers_symbols");
 			this.score += this.scoreFor("symbols_chars");
@@ -78,6 +82,16 @@ var PasswordStrength = function() {
 
 			case "uppercase_lowercase":
 				if (this.password.match(UPPERCASE_LOWERCASE_RE)) {
+					score = 10;
+				}
+				break;
+			case "uppercase":
+				if (this.password.match(UPPERCASE_RE)) {
+					score = 10;
+				}
+				break;
+			case "lowercase":
+				if (this.password.match(LOWERCASE_RE)) {
 					score = 10;
 				}
 				break;

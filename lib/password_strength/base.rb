@@ -4,6 +4,8 @@ module PasswordStrength
     MULTIPLE_SYMBOLS_RE = /[!@#\$%^&*?_~-].*?[!@#\$%^&*?_~-]/
     SYMBOL_RE = /[!@#\$%^&*?_~-]/
     UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/
+    LOWERCASE_RE = /[a-z]/
+    UPPERCASE_RE = /[A-Z]/
     INVALID = :invalid
     WEAK = :weak
     STRONG = :strong
@@ -127,6 +129,10 @@ module PasswordStrength
         score = 5 if password =~ MULTIPLE_SYMBOLS_RE
       when :uppercase_lowercase then
         score = 10 if password =~ UPPERCASE_LOWERCASE_RE
+      when :lowercase then
+        score = 10 if password =~ LOWERCASE_RE
+      when :uppercase then
+        score = 10 if password =~ UPPERCASE_RE
       when :numbers_chars then
         score = 15 if password =~ /[a-z]/i && password =~ /[0-9]/
       when :numbers_symbols then
@@ -166,6 +172,8 @@ module PasswordStrength
         @score += score_for(:numbers)
         @score += score_for(:symbols)
         @score += score_for(:uppercase_lowercase)
+        @score += score_for(:lowercase)
+        @score += score_for(:uppercase)
         @score += score_for(:numbers_chars)
         @score += score_for(:numbers_symbols)
         @score += score_for(:symbols_chars)
