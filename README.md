@@ -208,8 +208,20 @@ If you're using asset pipeline, just add the following lines to your `applicatio
 
 ### Ruby
 
+#### For current version
 1. Install all dependencies with `bundle install`.
 2. Run `rake test`.
+
+#### Execute tests with appraisal gem
+For generating a version gemfile for all gem versions configured on aprraisal gem, you have to execute:
+`bundle exec appraisal install`
+
+You can execute tests with diferentes gemfiles.lock. Example:
+
+*Gemfile with activemodel 5.2.3*
+`bundle exec appraisal activemodel-5.2.3 rake test`
+
+You can check all created gemfiles for differents versions on _gemfiles_ folder.
 
 ### JavaScript
 
